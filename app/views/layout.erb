@@ -9,9 +9,14 @@
   <body>
 
     <div class="container">
-      <% if Helpers.is_logged_in?(session) %>
+
+      <% unless locals.empty? %>
+        <%= message %>
+      <% end %>
+    
+      <% if is_logged_in? %>
       <div class="btn-group-vertical">
-          <button class="navigation_btn"><a href="/users/<%= Helpers.current_user(session).slug %>">Profile</a></button>
+          <button class="navigation_btn"><a href="/users/<%= current_user.slug %>">Profile</a></button>
           <button class="navigation_btn"><a href="/tweets/new">New Tweet</a></button>
 
           <button class="navigation_btn"><a href="/users">Users</a></button>
@@ -20,9 +25,10 @@
           <button class="navigation_btn"><a href="/logout">Logout</a></button>
         </div>
       <% end %>
-      <br><br><br><br><br>
       <%= yield %>
+
     </div>
+
 
   </body>
 </html>

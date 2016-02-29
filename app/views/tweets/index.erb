@@ -1,16 +1,14 @@
 <h1>Fwitter - Tweets</h1><br>
 
-<% if Helpers.is_logged_in?(session) %>
-  <h3>Welcome, <%= Helpers.current_user(session).username %></h3>
-<% end %>
+<h3>Welcome, <%= current_user.username %></h3>
 <br><br>
 
 <% Tweet.all.order(id: :desc).each do |tweet| %>
   <div class="row">
     <div class="span12">
-      <%= "@" + tweet.user.username %>
+      <a href="/users/<%= tweet.user.slug %>"><%= "@" + tweet.user.username %></a>
       <ul>
-        <%= tweet.content %>
+        <a href="/tweets/<%= tweet.id %>">"<%= tweet.content %>"</a>
       </ul>
     </div>
   </div>
