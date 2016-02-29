@@ -23,7 +23,7 @@ class ApplicationController < Sinatra::Base
 
   post '/signup' do
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      redirect "/signup", locals: {message: "Please submit enter all the information to complete signup."}
+      erb :"users/signup", locals: {message: "Please submit enter all the information to complete signup."}
     else
       @user = User.create(
         username: params[:username],
@@ -31,7 +31,7 @@ class ApplicationController < Sinatra::Base
         password: params[:password]
       )
       session[:user_id] = @user.id
-      redirect "/tweets", locals: {message: "Welcome to Fwitter. Thank you for signing up."}
+      erb :"tweets/index", locals: {message: "Welcome to Fwitter. Thank you for signing up."}
     end
   end
 
